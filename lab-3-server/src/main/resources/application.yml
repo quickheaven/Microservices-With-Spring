@@ -3,9 +3,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/kennyk65/Microservices-With-Spring-Student-Files
+          uri: https://github.com/quickheaven/Microservices-With-Spring
           searchPaths: ConfigData
-        native:
-          searchLocations: classpath:offline-repository/
 server:
   port: 8001
