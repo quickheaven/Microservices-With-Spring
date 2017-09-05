@@ -15,6 +15,7 @@ public class WordController {
 	public @ResponseBody String getWord() {
 		String[] wordArray = words.split(",");
 		int i = (int) Math.round(Math.random() * (wordArray.length - 1));
+		// icicle,refrigerator,blizzard,snowball
 		return wordArray[i];
 	}
 }

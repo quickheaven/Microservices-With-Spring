@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,8 +13,8 @@ import org.springframework.web.client.RestTemplate;
 @Controller
 public class SentenceController {
 
-	@Autowired 
-	private DiscoveryClient client;
+	@Autowired
+	private RestTemplate template;
 	
 	@RequestMapping("/sentence")
 	public @ResponseBody String getSentence() {
@@ -46,15 +45,9 @@ public class SentenceController {
 	}
 	
 	public String getWord(String service) {
-		//List<String> services = client.getServices();
-        List<ServiceInstance> list = client.getInstances(service);
-        if (list != null && list.size() > 0 ) {
-      	URI uri = list.get(0).getUri();
-	      	if (uri !=null ) {
-	      		return (new RestTemplate()).getForObject(uri,String.class);
-	      	}
-        }
-        return null;
+
+        return template.getForObject("http://" + service, String.class);
+ 
 	}
 	
 }
